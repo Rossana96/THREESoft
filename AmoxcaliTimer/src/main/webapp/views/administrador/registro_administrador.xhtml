@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/views/plantilla.xhtml">
+        <ui:define name="head">
+            <title>Registro</title>
+            <meta charset="utf-8"/>
+            <link rel="stylesheet" type="text/css" href="css/plantilla.css"></link>
+            <link rel="icon" href="imagenes/clock-regular.svg"/>
+            <link rel="stylesheet" type="text/css" href="css/inicioSesion.css"></link>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+
+        </ui:define>
+        <ui:define name="body">
+            <h:body>
+                <div style="width: 40%; align-content: center; margin-right: 30%; margin-left: 30%; margin-top: 50px;">
+                    <h3>Registro Administrador</h3>
+                    <h:form>
+                        <f:metadata>
+                            <f:viewAction action="#{registroController.clear}" />
+                        </f:metadata>
+                        <div>
+                            <p:messages for="messages"  />
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label>Nombre Completo</label>
+                                    <p:inputText class="form-control" id="nombreCompletoAca" value="${registroController.nombreCompleto}" 
+                                                 validator="${registroController.validateUniqueNameAdmin}"
+                                                 placeholder="Nombre Completo" required="true" requiredMessage="El nombre es necesario">
+                                        <p:ajax event="blur" update="nombreRequerido"/>
+                                    </p:inputText>
+                                    <p:message for="nombreCompletoAca" id="nombreRequerido"/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <label>Número de trabajador</label>
+                                <p:inputText type="number" class="form-control" id="numTraAca" value="${registroController.noTrabajador}" 
+                                             validator="${registroController.validateUniqueNumAdmin}"
+                                             placeholder="Número de trabajador" required="true" requiredMessage="El No. de Trabajador es necesario">
+                                    <p:ajax event="blur" update="numero"/>
+                                </p:inputText>
+                                <p:message for="numTraAca" id="numero"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Correo</label>
+                                <p:inputText type="email" class="form-control" id="correoAca" value="${registroController.correo}" 
+                                             validator="${registroController.validateUniqueEmailAdmin}" requiredMessage="Igresa un correo con extensión @ciencias.unam.mx"
+                                             placeholder="correo@ciencias.unam.mx" required="true">
+                                    <p:ajax event="blur" update="correo"/>
+                                </p:inputText>
+                                <p:message for="correoAca" id="correo"/>
+
+                                <label>Contraseña</label>
+                                <p:inputText type="password" class="form-control" id="password" value="${registroController.password}" 
+                                             requiredMessage="Ingresa un contraseña"
+                                             placeholder="contraseña" required="true">
+                                    <p:ajax event="blur" update="contrasenia"/>
+                                </p:inputText>
+                                <p:message for="password" id="contrasenia"/>
+
+                            </div>
+                            <p:commandButton action="#{registroController.registrarAdministrador()}" ajax="false"
+                                             class="btn btn-outline-warning btn-block" value="Registrar" update="form"/>
+                        </div>
+                    </h:form>                    
+                </div>
+            </h:body>
+        </ui:define>
+    </ui:composition> 
+</html>
