@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -126,7 +127,7 @@ public class LoginController {
                             "Felicidades, el administrador si existe en ele sistema", ""));
             return "AdminIndex?faces-redirect=true";
         } 
-        return "Registrar?faces-redirect=true";
+        return "registro?faces-redirect=true";
     }
 
     public String logoutUser() {
