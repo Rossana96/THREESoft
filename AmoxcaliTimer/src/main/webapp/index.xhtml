@@ -23,9 +23,9 @@
                         <h3>Iniciar Sesión</h3>
                         <div class="form-group">
 
-                            <label for="correo">Correo:</label>
+                            <label for="correo">Username o Correo:</label>
                             <p:inputText class="form-control"  placeholder="correo@ciencias.unam.mx" required="true" id="userName" size="10"
-                                         value="${loginController.email}"
+                                         value="${loginController.userName}"
                                          requiredMessage="Debe ingresar un usuario o correo" >
                             </p:inputText>
 
@@ -35,7 +35,7 @@
                             <label for="contraseña">Contraseña:</label>
 
                             <p:password class="form-control"  placeholder="Contraseña" required="true" 
-                                        requiredMessage="Debe ingresar su contraseña" id="password" value="${loginController.pass}"  size="10">
+                                        requiredMessage="Debe ingresar su contraseña" id="password" value="${loginController.password}"  size="10">
                             </p:password>
 
                         </div>

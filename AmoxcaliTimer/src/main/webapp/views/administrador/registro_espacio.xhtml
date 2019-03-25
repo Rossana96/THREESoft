@@ -86,3 +86,91 @@
         </ui:define>
     </ui:composition> 
 </html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/views/plantilla.xhtml">
+        <ui:define name="head">
+            <title>Registro</title>
+            <meta charset="utf-8"/>
+            <link rel="stylesheet" type="text/css" href="css/plantilla.css"></link>
+            <link rel="icon" href="imagenes/clock-regular.svg"/>
+            <link rel="stylesheet" type="text/css" href="css/inicioSesion.css"></link>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+
+        </ui:define>
+        <ui:define name="body">
+            <h:body>
+                <div style="width: 40%; align-content: center; margin-right: 30%; margin-left: 30%; margin-top: 50px;">
+                    <h3>Registro Espacio</h3>
+                    <h:form>
+                        <f:metadata>
+                            <f:viewAction action="#{registroController.clear}" />
+                        </f:metadata>
+                        <div>
+                            <p:messages for="messages"  />
+                        </div>
+                        <div class="form-group">
+
+                            <label>Nombre Espacio</label>
+                            <p:inputText class="form-control" id="nombreCompletoEspacio" value="${registroController.nombreCompleto}" 
+                                         validator="${registroController.validateUniqueNameEspacio}"
+                                         placeholder="Nombre espacio" required="true" requiredMessage="El nombre es necesario">
+                                <p:ajax event="blur" update="nombreRequerido"/>
+                            </p:inputText>
+                            <p:message for="nombreCompletoEspacio" id="nombreRequerido"/>
+
+                            <label>Edificio</label>
+                            <p:inputText class="form-control" id="edificio" value="${registroController.edificio}" 
+                                         requiredMessage="Edifico donde se encuentra el espacio"
+                                         placeholder="Edificio" required="true">
+                                <p:ajax event="blur" update="edificioRequerido"/>
+                            </p:inputText>
+                            <p:message for="edificio" id="edificioRequerido"/>
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <label>Capacidad </label>
+                                    <p:inputText type="number" class="form-control" id="capacidadEspacio" value="${registroController.capacidad}" 
+                                                 required="true" requiredMessage="La capacidad es necesaria">
+                                        <p:ajax event="blur" update="capacidadRquerida"/>
+                                    </p:inputText>
+                                    <small class="nota form-text text-muted">Personas que pueden estar dentro del espacio cultural</small>
+                                    <p:message for="capacidadEspacio" id="capacidadRquerida"/>
+                                </div>
+                                <div class="col">
+                                    <label>Piso</label>
+                                    <p:inputText type="number" class="form-control" id="piso" value="${registroController.piso}" 
+                                                 placeholder="Piso del adificio" required="true" requiredMessage="El piso es necesario">
+                                        <p:ajax event="blur" update="pisoRquerido"/>
+                                    </p:inputText>
+                                    <small class="nota form-text text-muted">Piso en el que se encuentra del edificio</small>
+                                    <p:message for="piso" id="pisoRquerido"/>
+                                </div>
+                            </div>
+                            <div class="form-row" style=" margin-bottom: 20px;">
+                                <label>Recursos</label>
+                                <p:inputText class="form-control" id="recursos" value="${registroController.recursos}" 
+                                             requiredMessage="La descripción de recursos es necesaria"
+                                             placeholder="Recursos" required="true">
+                                    <p:ajax event="blur" update="recursosRequeridos"/>
+                                </p:inputText>
+                                <p:message for="recursos" id="recursosRequeridos"/>
+                                <small class="nota form-text text-muted">Recursos con los que cuenta el espacio cultural</small>
+                            </div>
+
+                            <p:commandButton action="#{registroController.registrarEspacio()}" ajax="false"
+                                             class="btn btn-outline-warning btn-block" value="Registrar" update="form"/>
+                        </div>
+
+                    </h:form>                    
+                </div>
+            </h:body>
+        </ui:define>
+    </ui:composition> 
+</html>

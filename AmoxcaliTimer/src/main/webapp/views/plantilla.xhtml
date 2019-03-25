@@ -1,19 +1,23 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <h:outputStylesheet library="webjars" name="bootstrap/4.1.3/css/bootstrap.min-jsf.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"></link>
         <link rel="stylesheet" type="text/css" href="css/plantilla.css"></link>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
         <link rel="icon" href="imagenes/clock-regular.svg"/>
+        <script src="script/plantilla.js"></script>
         <ui:insert name="head"/>
     </h:head>
 
-    <h:body >
+    <h:body id="main">
         <header>
             <div class="container">
                 <div class="row">
@@ -29,16 +33,27 @@
                 </div>
             </div>
         </header>
+
+        <p:outputPanel  rendered="${not empty user}" >
+            <div id="mySidenav" class="sidenav">
+                <a href="../administrador/registro_administrador.xhtml" >Registrar Administrador</a>
+                <a href="../administrador/registro_espacio.xhtml" >Registrar Espacio</a>
+            </div>
+        </p:outputPanel>
+
+        <nav class="navbar navbar-light bg-light justify-content-between" >
+            <a class="navbar-brand"></a>
+            <form class="form-inline">
+                <h:button  id="menu" class="btn btn-info" onclick="openNav()" value="Menú" rendered="${not empty user}"/>
+                <h:button class="btn btn-danger" id="cerrar-sesion" value="Cerrar sesión"  outcome="/views/general/cerrar_sesion.xhtml" rendered="${not empty user}"/>
+            </form>
+        </nav>
         <ui:insert name="body"/>
 
-
-        <br/>
-        <div style="height: 40px;"></div>
+        <div style="height: 100px;"></div>
         <footer>
             <ul>
-                <li>Acerca de THREESoft</li>
-                <li>Sugerencias</li>
-                <li>Correo: amoxcalitimer@ciencias.unam.mx</li>
+                <li>Contacto: gestorec@gmail.com</li>
                 <li>Copyright &#169; Todos los Derechos Reservados </li>
             </ul>
         </footer>
