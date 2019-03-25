@@ -4,35 +4,48 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="views/plantilla.xhtml">
         <ui:define name="head">
             <title>Bienvenido</title>
             <link rel="stylesheet" type="text/css" href="css/inicioSesion.css"></link>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
-            
+
         </ui:define>
         <ui:define name="body">
             <h:body>
-                <div>
-                <form class="inicio-sesion jumbotron vertical-center" style=" width: 30%; display: inline-block">
-                    <h3>Iniciar Sesión</h3>
-                    <div class="form-group">
-                        <label for="correo">Correo:</label>
-                        <input type="email" class="form-control" id="correo" aria-describedby="emailHelp" placeholder="correo@ciencias.unam.mx"/>
+
+                <div style="width: 40%; align-content: center; margin-right: 30%; margin-left: 30%; margin-top: 50px;">
+                    <h:form>
+                        <div>
+                            <p:messages for="messages" closable="true"/>
+                        </div>
+                        <h3>Iniciar Sesión</h3>
+                        <div class="form-group">
+
+                            <label for="correo">Correo:</label>
+                            <p:inputText class="form-control"  placeholder="correo@ciencias.unam.mx" required="true" id="userName" size="10"
+                                         value="${loginController.email}"
+                                         requiredMessage="Debe ingresar un usuario o correo" >
+                            </p:inputText>
+
                             <small id="nota" class="form-text text-muted">Acceso únicamente con correo de ciencias</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="contraseña">Contraseña:</label>
-                        <input type="password" class="form-control" id="idcontraseña" placeholder="contraseña"/>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
-                    <div style="padding-top: 10px;">
-                        <a href="views/registro.xhtml">Crear Cuenta Clic Aquí</a>
-                    </div>
-                </form>
-                    
+                        </div>
+                        <div class="form-group">
+                            <label for="contraseña">Contraseña:</label>
+
+                            <p:password class="form-control"  placeholder="Contraseña" required="true" 
+                                        requiredMessage="Debe ingresar su contraseña" id="password" value="${loginController.pass}"  size="10">
+                            </p:password>
+
+                        </div>
+
+                        <p:commandButton action="#{loginController.loginUser}" ajax="false" 
+                                         class="btn btn-outline-info btn-block" value="Iniciar sesión" update="form"/>
+                        <div style="padding-top: 20px;">
+                            Crear Cuenta <a href="views/general/registro.xhtml"> Registrate </a>
+                        </div>
+                    </h:form>
                 </div>
             </h:body>
         </ui:define>

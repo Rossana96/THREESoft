@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-tomcat8</actionName>
+            <displayName>tomcat8</displayName>
+        </action>
+    </actions>
